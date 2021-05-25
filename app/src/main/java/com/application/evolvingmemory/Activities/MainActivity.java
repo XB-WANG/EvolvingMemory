@@ -79,8 +79,10 @@ public class MainActivity extends FragmentActivity  {
     private QuickSkimFragment quickSkimFragment;
 
     private ActivityMainBinding activityMainBinding;
-    private List<Fragment> fragments=new ArrayList<>();
-    private List<String> titles=new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>();
+    private List<Integer> icon = new ArrayList<>();
+    private List<Integer> icon_full = new ArrayList<>();
+    Integer icon_flag = 0;
     ListFragment listFragment;
     ScheduleFragment scheduleFragment;
     SettingFragment settingFragment;
@@ -192,9 +194,13 @@ public class MainActivity extends FragmentActivity  {
         transaction.replace(R.id.content,noteFragment);
         transaction.commit();*/
 
-        titles.add("");
-        titles.add("");
-        titles.add("");
+        icon.add(R.mipmap.list);
+        icon.add(R.mipmap.schedule);
+        icon.add(R.mipmap.settings);
+
+        icon_full.add(R.mipmap.list_full);
+        icon_full.add(R.mipmap.schedule_full);
+        icon_full.add(R.mipmap.settings_full);
 
         fragments.add(new ListFragment());
         fragments.add(new ScheduleFragment());
@@ -203,13 +209,20 @@ public class MainActivity extends FragmentActivity  {
         //创建适配器
         MainVPAdapter mainVPAdapter = new MainVPAdapter(getSupportFragmentManager(),getLifecycle(),fragments);
         activityMainBinding.mainVp2.setAdapter(mainVPAdapter);
+//        activityMainBinding.mainVp2.setCurrentItem();
+//        activityMainBinding.mainVp2.setOffscreenPageLimit(2);
 
         //TabLayout与ViewPage2联动关键代码
         new TabLayoutMediator(activityMainBinding.bottomTab, activityMainBinding.mainVp2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(titles.get(position));
-                tab.setIcon(R.mipmap.list_full);
+                if (icon_flag == 0)
+                {
+                    tab.setIcon(icon_full.get(position));
+                    icon_flag = 1;
+                }
+                else
+                    tab.setIcon(icon.get(position));
             }
         }).attach();
 
@@ -225,17 +238,17 @@ public class MainActivity extends FragmentActivity  {
         activityMainBinding.bottomTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                tab.setIcon(icon_full.get(tab.getPosition()));
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                tab.setIcon(icon.get(tab.getPosition()));
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                tab.setIcon(icon_full.get(tab.getPosition()));
             }
         });
 

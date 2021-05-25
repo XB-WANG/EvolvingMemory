@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.application.evolvingmemory.Adapters.ListVPAdapter;
 import com.application.evolvingmemory.R;
 import com.application.evolvingmemory.databinding.ActivityMainBinding;
 import com.application.evolvingmemory.databinding.FragmentListBinding;
@@ -41,9 +42,9 @@ import java.util.List;
  * Use the {@link ListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+public class ListFragment extends Fragment {
 
-
+    //Binding
     private FragmentListBinding fragmentListBinding;
 
     //Fragments
@@ -55,7 +56,8 @@ public class ListFragment extends Fragment implements NavigationView.OnNavigatio
     private CloudSpaceFragment cloudSpaceFragment;
     private QuickSkimFragment quickSkimFragment;
 
-    private List<androidx.fragment.app.Fragment> fragments=new ArrayList<>();
+    //Adapter
+    private List<Fragment> fragments=new ArrayList<>();
     private List<String> titles=new ArrayList<>();
 
 
@@ -103,22 +105,84 @@ public class ListFragment extends Fragment implements NavigationView.OnNavigatio
 
     void init(){
 
-        titles.add("");
-        titles.add("");
-        titles.add("");
-        titles.add("");
-        titles.add("");
-        titles.add("");
-        titles.add("");
+        noteFragment = new NoteFragment();
+        inventoryFragment = new InventoryFragment();
+        itemsFragment = new ItemsFragment();
+        collectionFragment = new CollectionFragment();
+        shareFragment = new ShareFragment();
+        cloudSpaceFragment = new CloudSpaceFragment();
+        quickSkimFragment = new QuickSkimFragment();
 
-        fragments.add(new NoteFragment());
-        fragments.add(new InventoryFragment());
-        fragments.add(new ItemsFragment());
-        fragments.add(new CollectionFragment());
-        fragments.add(new ShareFragment());
-        fragments.add(new CloudSpaceFragment());
-        fragments.add(new QuickSkimFragment());
 
+
+        fragments.add(noteFragment);
+        fragments.add(inventoryFragment);
+        fragments.add(itemsFragment);
+        fragments.add(collectionFragment);
+        fragments.add(shareFragment);
+        fragments.add(cloudSpaceFragment);
+        fragments.add(quickSkimFragment);
+
+//        ListVPAdapter listVPAdapter = new ListVPAdapter(getFragmentManager(),getLifecycle(),fragments);
+//        fragmentListBinding.listVp2.setAdapter(listVPAdapter);
+//
+//        fragmentListBinding.listVp2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                super.onPageSelected(position);
+//            }
+//        });
+
+        fragmentListBinding.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+
+                switch(item.getItemId()){
+                    case R.id.note_item:
+                        transaction.replace(R.id.fg_content,noteFragment);
+                        fragmentListBinding.listTitle.setText("笔记");
+                        drawerIsVisible();
+                        break;
+                    case R.id.inventory_item:
+                        transaction.replace(R.id.fg_content,inventoryFragment);
+                        fragmentListBinding.listTitle.setText("清单");
+                        drawerIsVisible();
+                        break;
+                    case R.id.items_item:
+                        transaction.replace(R.id.fg_content,itemsFragment);
+                        fragmentListBinding.listTitle.setText("事项");
+                        drawerIsVisible();
+                        break;
+                    case R.id.collection_item:
+                        transaction.replace(R.id.fg_content,collectionFragment);
+                        fragmentListBinding.listTitle.setText("收藏");
+                        drawerIsVisible();
+                        break;
+                    case R.id.share_item:
+                        transaction.replace(R.id.fg_content,shareFragment);
+                        fragmentListBinding.listTitle.setText("共享");
+                        drawerIsVisible();
+                        break;
+                    case R.id.cloud_space_item:
+                        transaction.replace(R.id.fg_content,cloudSpaceFragment);
+                        fragmentListBinding.listTitle.setText("云空间");
+                        drawerIsVisible();
+                        break;
+                    case R.id.quick_skim_item:
+                        transaction.replace(R.id.fg_content,quickSkimFragment);
+                        fragmentListBinding.listTitle.setText("速记");
+                        drawerIsVisible();
+                        break;
+                }
+
+                transaction.commit();
+
+                return false;
+            }
+        });
 
 
         //设置toolbar监听器
@@ -158,6 +222,14 @@ public class ListFragment extends Fragment implements NavigationView.OnNavigatio
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+
+    }
+
 
     @Override
     public void onDestroyView() {
@@ -165,61 +237,9 @@ public class ListFragment extends Fragment implements NavigationView.OnNavigatio
         fragmentListBinding = null;
     }
 
-
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
-
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-
-        switch(menuItem.getItemId()){
-            case R.id.note_item:
-                noteFragment = new NoteFragment();
-                transaction.replace(R.id.content,noteFragment);
-                fragmentListBinding.listTitle.setText("笔记");
-                drawerIsVisible();
-                break;
-            case R.id.inventory_item:
-                inventoryFragment = new InventoryFragment();
-                transaction.replace(R.id.content,inventoryFragment);
-                fragmentListBinding.listTitle.setText("清单");
-                drawerIsVisible();
-                break;
-            case R.id.items_item:
-                itemsFragment = new ItemsFragment();
-                transaction.replace(R.id.content,itemsFragment);
-                fragmentListBinding.listTitle.setText("事项");
-                drawerIsVisible();
-                break;
-            case R.id.collection_item:
-                collectionFragment = new CollectionFragment();
-                transaction.replace(R.id.content,collectionFragment);
-                fragmentListBinding.listTitle.setText("收藏");
-                drawerIsVisible();
-                break;
-            case R.id.share_item:
-                shareFragment = new ShareFragment();
-                transaction.replace(R.id.content,shareFragment);
-                fragmentListBinding.listTitle.setText("共享");
-                drawerIsVisible();
-                break;
-            case R.id.cloud_space_item:
-                cloudSpaceFragment = new CloudSpaceFragment();
-                transaction.replace(R.id.content,cloudSpaceFragment);
-                fragmentListBinding.listTitle.setText("云空间");
-                drawerIsVisible();
-                break;
-            case R.id.quick_skim_item:
-                quickSkimFragment = new QuickSkimFragment();
-                transaction.replace(R.id.content,quickSkimFragment);
-                fragmentListBinding.listTitle.setText("速记");
-                drawerIsVisible();
-                break;
-        }
-
-        transaction.commit();
-
-        return false;
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 
