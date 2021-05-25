@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.LoginActivity"
+    android:fitsSystemWindows="false"
+    android:background="@mipmap/bg_img">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#59000000">
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
+            android:textColor="#FFFFFF"
+            android:textSize="38sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.075" />
+
+        <TextView
+            android:id="@+id/welcome_words"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新用户将自动创建账号"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/welcome"
+            app:layout_constraintTop_toBottomOf="@+id/welcome"
+            app:layout_constraintVertical_bias="0.015" />
+
+        <com.application.evolvingmemory.Utils.PhoneEditText
+            android:id="@+id/phone_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:background="@drawable/translucent"
+            android:imeOptions="normal"
+            android:inputType="phone"
+            android:maxLength="13"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/cursor_edit"
+            android:textSize="21sp"
+            android:hint="输入手机号码"
+            android:textColorHint="#99FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/welcome_words"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_words"
+            app:layout_constraintVertical_bias="0.09"
+            tools:text="123 1234 1234" />
+
+        <CheckBox
+            android:id="@+id/check_treaty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:theme="@style/myCheckBox"
+            style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/welcome_words"
+            app:layout_constraintTop_toBottomOf="@+id/phone_edit"
+            app:layout_constraintVertical_bias="0.04" />
+
+        <com.qmuiteam.qmui.widget.textview.QMUISpanTouchFixTextView
+            android:id="@+id/treaty_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="阅读并同意《用户注册服务协议》《隐私保护政策》"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/check_treaty"
+            app:layout_constraintTop_toBottomOf="@+id/phone_edit"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="7dp"
+            android:background="@drawable/corners_button_none"
+            android:text="➔"
+            android:textColor="#C4000000"
+            android:textSize="30sp"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/treaty_txt"
+            app:layout_constraintVertical_bias="0.15"/>
+
+        <com.qmuiteam.qmui.widget.textview.QMUISpanTouchFixTextView
+            android:id="@+id/free_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本机号码免密登录"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_btn"
+            app:layout_constraintVertical_bias="0.07" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/qq_module"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/login_qq_img"
+                    android:layout_width="25dip"
+                    android:layout_height="25dip"
+                    android:src="@mipmap/login_qq" />
+
+                <TextView
+                    android:id="@+id/login_qq_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/login_qq_img"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="17dp"
+                    android:text="QQ登录"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/wechat_module"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="60dp"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/login_wechat_img"
+                    android:layout_width="25dip"
+                    android:layout_height="25dip"
+                    android:src="@mipmap/login_wechat" />
+
+                <TextView
+                    android:id="@+id/login_wechat_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/login_wechat_img"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="17dp"
+                    android:text="微信登录"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

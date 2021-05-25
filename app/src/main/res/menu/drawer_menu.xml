@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_slide_menu">
+    <group
+        android:id="@+id/slide_menu_group">
+
+
+        <item
+            android:id="@+id/note_item"
+            android:title="笔记"/>
+        <item
+            android:id="@+id/inventory_item"
+            android:title="清单"/>
+        <item
+            android:id="@+id/items_item"
+            android:title="事项"/>
+        <item
+            android:id="@+id/collection_item"
+            android:title="收藏"/>
+        <item
+            android:id="@+id/share_item"
+            android:title="分享"/>
+        <item
+            android:id="@+id/cloud_space_item"
+            android:title="云空间"/>
+        <item
+            android:id="@+id/quick_skim_item"
+            android:title="速记"/>
+
+    </group>
+
+</menu>
